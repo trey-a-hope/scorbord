@@ -1,0 +1,19 @@
+{
+    "rules": {
+      "Games":{
+          /*TODO: IMPLEMENT ON ALL TABLES TO ENSURE USER MUST BE AUTHENTICATED BEFORE WRITING.
+          '$userId'(Property 'userId' on object 'Camp') must equal the auth.uid.
+          "$userId": {
+            ".write": "$userId === auth.uid"  //SPECIFIC AUTHENTICATED USER...
+            ".write": "auth != null"          //ANY AUTHENTICATED USER...
+          }
+          */
+          ".write":true
+      },
+      "Users":{
+          ".write":true,
+          ".indexOn" : "uid"
+      },
+      ".read": true
+    }
+}
