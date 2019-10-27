@@ -1,4 +1,4 @@
-package com.example.scorbord
+package com.io.scorbord
 
 import android.os.Bundle
 

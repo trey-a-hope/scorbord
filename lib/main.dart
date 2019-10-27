@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       [DeviceOrientation.portraitUp],
     );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Scorbord',
       theme: ThemeData(
         primarySwatch: Colors.blue,

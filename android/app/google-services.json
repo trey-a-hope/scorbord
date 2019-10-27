@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "534505651197",
+    "firebase_url": "https://scoreboardx.firebaseio.com",
+    "project_id": "project-4262310415987696317",
+    "storage_bucket": "project-4262310415987696317.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534505651197:android:99dfc1b28ad1397577f794",
+        "android_client_info": {
+          "package_name": "com.io.scorbord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534505651197-mrmkugvsi6m6pqqc7s75ueoljk70m5fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEz-c2Fs8X0JPWdMt0y71IAfL0dTFBrjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534505651197-mrmkugvsi6m6pqqc7s75ueoljk70m5fg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "534505651197-n2btvudgta8ev56pn6sg8vl1euhjspqr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.scorbord"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

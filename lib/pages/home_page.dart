@@ -6,8 +6,10 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:scorbord/common/spinner.dart';
+import 'package:scorbord/constants.dart';
 import 'package:scorbord/models/bet.dart';
 import 'package:scorbord/models/game.dart';
+import 'package:scorbord/models/nba_team.dart';
 import 'package:scorbord/services/db.dart';
 import 'package:scorbord/services/modal.dart';
 
@@ -72,9 +74,27 @@ class HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: _isLoading
           ? Spinner()
-          : Center(
-              child: Text('Text'),
+          : ListView.builder(
+              itemCount: NBATeams.length,
+              itemBuilder: (BuildContext ctx, int index) {
+                return _buildTeamTile(team: NBATeams[index]);
+              },
             ),
+    );
+  }
+
+  ListTile _buildTeamTile({@required NBATeam team}) {
+    return ListTile(
+      onTap: (){
+        getIt<Modal>().showInSnackBar(scaffoldKey: _scaffoldKey, text: team.name);
+      },
+      leading: CircleAvatar(
+        backgroundColor: Colors.white,
+        backgroundImage: NetworkImage(team.imgUrl),
+      ),
+      title: Text('${team.city} ${team.name}'),
+      subtitle: Text('${team.conference} Conference'),
+      trailing: Icon(Icons.chevron_right),
     );
   }
 }

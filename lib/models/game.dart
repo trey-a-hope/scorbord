@@ -9,10 +9,9 @@ class Game extends ObjectMethods {
   int homeTeamID;
   int homeTeamScore;
   String id;
+  bool isActive;
   double potAmount;
   DateTime starts;
-  int status;
-  bool taken;
   DateTime time;
   String userID;
 
@@ -23,10 +22,10 @@ class Game extends ObjectMethods {
       @required int homeTeamID,
       @required int homeTeamScore,
       @required String id,
+      @required bool isActive,
       @required double potAmount,
       @required DateTime starts,
       @required int status,
-      @required bool taken,
       @required DateTime time,
       @required String userID}) {
     this.awayTeamID = awayTeamID;
@@ -35,10 +34,9 @@ class Game extends ObjectMethods {
     this.homeTeamID = homeTeamID;
     this.homeTeamScore = homeTeamScore;
     this.id = id;
+    this.isActive = isActive;
     this.potAmount = potAmount;
     this.starts = starts;
-    this.status = status;
-    this.taken = taken;
     this.time = time;
     this.userID = userID;
   }
@@ -52,10 +50,10 @@ class Game extends ObjectMethods {
       homeTeamID: data['homeTeamID'],
       homeTeamScore: data['homeTeamScore'],
       id: data['id'],
+      isActive: data['isActive'],
       potAmount: data['potAmount'],
       starts: data['starts'].toDate(),
       status: data['status'],
-      taken: data['taken'],
       time: data['time'].toDate(),
       userID: data['userID'],
     );
@@ -70,10 +68,9 @@ class Game extends ObjectMethods {
       'homeTeamID': homeTeamID,
       'homeTeamScore': homeTeamScore,
       'id': id,
+      'isActive': isActive,
       'potAmount': potAmount,
       'starts': starts,
-      'status': status,
-      'taken': taken,
       'time': time,
       'userID': userID,
     };
