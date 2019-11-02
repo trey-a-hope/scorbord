@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scorbord/models/user.dart';
+import 'package:scorbord/models/database/user.dart';
 
 abstract class Auth {
   Future<User> getCurrentUser();

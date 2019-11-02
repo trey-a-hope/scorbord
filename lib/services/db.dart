@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:scorbord/models/bet.dart';
-import 'package:scorbord/models/game.dart';
-import 'package:scorbord/models/user.dart';
+import 'package:scorbord/models/database/bet.dart';
+import 'package:scorbord/models/database/game.dart';
+import 'package:scorbord/models/database/user.dart';
 
 abstract class DB {
   //Bets

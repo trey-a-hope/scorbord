@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:scorbord/pages/home_page.dart';
+import 'package:scorbord/pages/holder.dart';
 import 'package:scorbord/services/auth.dart';
 import 'package:scorbord/services/db.dart';
 import 'package:scorbord/services/fcm_notification.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: Holder(),
     );
   }
 }

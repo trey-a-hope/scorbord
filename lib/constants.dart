@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scorbord/models/nba_team.dart';
+import 'package:scorbord/models/local/nba_team.dart';
 
 List<NBATeam> NBATeams = [
   NBATeam(
