@@ -1,3 +1,16 @@
+# Sports betting is legal in these ten states.
+# https://patch.com/ohio/cleveland/here-s-latest-sports-betting-ohio
+Nevada
+New Jersey
+Delaware
+Mississippi
+West Virginia
+Pennsylvania
+Rhode Island
+New York
+Iowa
+Indiana
+
 # scorbord
 
 Mobile app for bettings on sports games.

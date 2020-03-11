@@ -12,6 +12,10 @@ import 'package:scorbord/services/validator.dart';
 final GetIt getIt = GetIt.instance;
 
 void main() {
+
+  //Widgets Flutter Binding
+  WidgetsFlutterBinding.ensureInitialized();
+
   getIt.registerSingleton<Auth>(AuthImplementation(), signalsReady: true);
   getIt.registerSingleton<DB>(DBImplementation(), signalsReady: true);
   getIt.registerSingleton<FCMNotification>(FCMNotificationImplementation(),
