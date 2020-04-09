@@ -55,7 +55,7 @@ class GamesPageState extends State<GamesPage> {
         separatorWidget: Divider(),
         itemBuilder: (BuildContext context, GameModel game) {
           return ListTile(
-            title: Text('${game.id}'),
+            title: Text('ID: ${game.id}'),
             subtitle: Text('Season: ${game.season}'),
             trailing: Icon(Icons.chevron_right),
             onTap: () {},

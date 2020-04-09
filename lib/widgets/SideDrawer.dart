@@ -102,9 +102,12 @@ class SideDrawerState extends State<SideDrawer> {
           ),
           Spacer(),
           SafeArea(
-            child: Text(
-              'Version - $version+$buildNumber',
-              style: TextStyle(color: Colors.deepPurpleAccent),
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Text(
+                'Version - $version+$buildNumber',
+                style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
           )
         ],
