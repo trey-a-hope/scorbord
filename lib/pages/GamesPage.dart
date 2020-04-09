@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:scorbord/common/spinner.dart';
+import 'package:scorbord/models/GameModel.dart';
 import 'package:scorbord/models/PlayerModel.dart';
+import 'package:scorbord/models/TeamModel.dart';
 import 'package:scorbord/services/NBAService.dart';
 import 'package:scorbord/widgets/SideDrawer.dart';
 import 'package:pagination/pagination.dart';
 
-class PlayersPage extends StatefulWidget {
+class GamesPage extends StatefulWidget {
   @override
-  State createState() => PlayersPageState();
+  State createState() => GamesPageState();
 }
 
-class PlayersPageState extends State<PlayersPage> {
+class GamesPageState extends State<GamesPage> {
   final GetIt getIt = GetIt.I;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int page = 1;
   bool endPageFetch = false;
+
   @override
   void initState() {
     super.initState();
   }
 
-  Future<List<PlayerModel>> pageFetch(int offset) async {
+  Future<List<GameModel>> pageFetch(int offset) async {
     if (!endPageFetch) {
-      List<PlayerModel> players = await getIt<INBAService>().getPlayers(page: page);
+      List<GameModel> games = await getIt<INBAService>().getGames(page: page);
 
-      if (players.isEmpty) endPageFetch = true;
+      if (games.isEmpty) endPageFetch = true;
 
       page = page + 1;
 
-      return players;
+      return games;
     } else {
       return [];
     }
@@ -40,29 +43,30 @@ class PlayersPageState extends State<PlayersPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Players'),
+        title: Text('Games'),
         centerTitle: true,
       ),
       drawer: SideDrawer(
-        page: 'Players',
+        page: 'Games',
       ),
-      body: PaginationList<PlayerModel>(
+      body: PaginationList<GameModel>(
         onLoading: Spinner(),
         onPageLoading: Spinner(),
         separatorWidget: Divider(),
-        itemBuilder: (BuildContext context, PlayerModel player) {
+        itemBuilder: (BuildContext context, GameModel game) {
           return ListTile(
-            title: Text('${player.firstName} ${player.lastName}'),
-            subtitle: Text('Position: ${player.position}'),
+            title: Text('${game.id}'),
+            subtitle: Text('Season: ${game.season}'),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {
-              print('You clicked ${player.firstName} ${player.lastName}!');
-            },
+            onTap: () {},
           );
         },
         pageFetch: pageFetch,
         onError: (dynamic error) => Center(
-          child: Text('Something Went Wrong'),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50),
+            child: Text(error.toString()),
+          ),
         ),
         onEmpty: Center(
           child: Text('Empty List'),

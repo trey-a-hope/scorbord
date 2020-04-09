@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:scorbord/constants.dart';
 import 'package:scorbord/pages/HomePage.dart';
 import 'package:scorbord/pages/PlayersPage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:scorbord/pages/TeamsPage.dart';
+import 'package:scorbord/pages/GamesPage.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key key, @required this.page}) : super(key: key);
@@ -18,7 +20,7 @@ class SideDrawerState extends State<SideDrawer> {
   SideDrawerState({@required this.page});
 
   final String page;
-  final Color iconColor = Colors.black;
+  final Color iconColor = Colors.redAccent;
 
   final GetIt getIt = GetIt.I;
 
@@ -29,15 +31,18 @@ class SideDrawerState extends State<SideDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Drawer(
-      child: ListView(
+      child: Column(
         children: <Widget>[
           DrawerHeader(
             child: Column(
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text('Welcome back, Trey'),
+                  child: Text('Hello there!'),
                 ),
                 CircleAvatar(
                   radius: 50.0,
@@ -84,6 +89,24 @@ class SideDrawerState extends State<SideDrawer> {
               );
             },
           ),
+          ListTile(
+            leading: Icon(Icons.games, color: iconColor),
+            title: Text('Games'),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => GamesPage(),
+                ),
+              );
+            },
+          ),
+          Spacer(),
+          SafeArea(
+            child: Text(
+              'Version - $version+$buildNumber',
+              style: TextStyle(color: Colors.deepPurpleAccent),
+            ),
+          )
         ],
       ),
     );

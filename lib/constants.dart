@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:scorbord/extensions/HexColor.dart';
 import 'package:scorbord/models/local/nba_team.dart';
+
+String version;
+String buildNumber;
 
 final List<NBATeam> NBATeams = [
   NBATeam(
@@ -274,14 +277,4 @@ final List<NBATeam> NBATeams = [
       url: "http://www.nba.com/teams/wizards")
 ];
 
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
 
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-}

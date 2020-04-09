@@ -16,22 +16,24 @@ class TeamsPageState extends State<TeamsPage> {
   final GetIt getIt = GetIt.I;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int page = 1;
-
+  bool endPageFetch = false;
   @override
   void initState() {
     super.initState();
   }
 
   Future<List<TeamModel>> pageFetch(int offset) async {
-    List<TeamModel> teams = await getIt<INBAService>().getTeams(page: page);
+    if (!endPageFetch) {
+      List<TeamModel> teams = await getIt<INBAService>().getTeams(page: page);
 
-    if (teams.isEmpty) {
-      return List<TeamModel>();
+      if (teams.isEmpty) endPageFetch = true;
+
+      page = page + 1;
+
+      return teams;
+    } else {
+      return [];
     }
-    
-    page = page + 1;
-
-    return teams;
   }
 
   @override

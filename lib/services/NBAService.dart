@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:scorbord/models/GameModel.dart';
 import 'dart:convert' show Encoding, json;
 
 import 'package:scorbord/models/PlayerModel.dart';
@@ -11,6 +12,8 @@ abstract class INBAService {
   Future<PlayerModel> getPlayer({@required int playerID});
   Future<List<TeamModel>> getTeams({@required int page});
   Future<TeamModel> getTeam({@required int teamID});
+    Future<List<GameModel>> getGames({@required int page});
+  Future<GameModel> getGame({@required int gameID});
 }
 
 class NBAService extends INBAService {
@@ -100,6 +103,50 @@ class NBAService extends INBAService {
       Map bodyMap = json.decode(response.body);
       TeamModel team = TeamModel.fromJSON(map: bodyMap);
       return team;
+    } catch (e) {
+      throw PlatformException(message: e.toString(), code: '');
+    }
+  }
+
+  @override
+  Future<GameModel> getGame({@required int gameID}) async {
+    Uri uri = Uri.https(authority, '${unencodedPath}games/$gameID');
+
+    http.Response response = await http.get(
+      uri,
+      headers: {'content-type': 'application/json'},
+    );
+
+    try {
+      Map bodyMap = json.decode(response.body);
+      GameModel game = GameModel.fromJSON(map: bodyMap);
+      return game;
+    } catch (e) {
+      throw PlatformException(message: e.toString(), code: '');
+    }
+  }
+
+  @override
+  Future<List<GameModel>> getGames({@required int page}) async {
+    Map<String, String> params = {
+      'page': '$page',
+    };
+    Uri uri = Uri.https(authority, '${unencodedPath}games', params);
+
+    http.Response response = await http.get(
+      uri,
+      headers: {'content-type': 'application/json'},
+    );
+
+    try {
+      Map bodyMap = json.decode(response.body);
+      List<dynamic> gamesData = bodyMap['data'];
+      List<GameModel> games = List<GameModel>();
+      gamesData.forEach((gameData) {
+        GameModel game = GameModel.fromJSON(map: gameData);
+        games.add(game);
+      });
+      return games;
     } catch (e) {
       throw PlatformException(message: e.toString(), code: '');
     }
