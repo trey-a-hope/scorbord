@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:scorbord/pages/HomePage.dart';
 import 'package:scorbord/pages/PlayersPage.dart';
 import 'package:scorbord/pages/exampleWidget.dart';
 import 'package:scorbord/services/NBAService.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ExampleWidget(),
+      home: HomePage(),
     );
   }
 }

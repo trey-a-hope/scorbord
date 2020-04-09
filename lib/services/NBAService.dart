@@ -4,14 +4,16 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' show Encoding, json;
 
 import 'package:scorbord/models/PlayerModel.dart';
+import 'package:scorbord/models/TeamModel.dart';
 
 abstract class INBAService {
   Future<List<PlayerModel>> getPlayers({@required int page});
   Future<PlayerModel> getPlayer({@required int playerID});
+  Future<List<TeamModel>> getTeams({@required int page});
+  Future<TeamModel> getTeam({@required int teamID});
 }
 
 class NBAService extends INBAService {
-  final String endpoint = 'https://www.balldontlie.io/api/v1/';
   final String authority = 'www.balldontlie.io';
   final String unencodedPath = '/api/v1/';
 
@@ -54,6 +56,50 @@ class NBAService extends INBAService {
       Map bodyMap = json.decode(response.body);
       PlayerModel player = PlayerModel.fromJSON(map: bodyMap);
       return player;
+    } catch (e) {
+      throw PlatformException(message: e.toString(), code: '');
+    }
+  }
+
+  @override
+  Future<List<TeamModel>> getTeams({@required int page}) async {
+    Map<String, String> params = {
+      'page': '$page',
+    };
+    Uri uri = Uri.https(authority, '${unencodedPath}teams', params);
+
+    http.Response response = await http.get(
+      uri,
+      headers: {'content-type': 'application/json'},
+    );
+
+    try {
+      Map bodyMap = json.decode(response.body);
+      List<dynamic> teamsData = bodyMap['data'];
+      List<TeamModel> teams = List<TeamModel>();
+      teamsData.forEach((teamData) {
+        TeamModel team = TeamModel.fromJSON(map: teamData);
+        teams.add(team);
+      });
+      return teams;
+    } catch (e) {
+      throw PlatformException(message: e.toString(), code: '');
+    }
+  }
+
+  @override
+  Future<TeamModel> getTeam({@required int teamID}) async {
+    Uri uri = Uri.https(authority, '${unencodedPath}teams/$teamID');
+
+    http.Response response = await http.get(
+      uri,
+      headers: {'content-type': 'application/json'},
+    );
+
+    try {
+      Map bodyMap = json.decode(response.body);
+      TeamModel team = TeamModel.fromJSON(map: bodyMap);
+      return team;
     } catch (e) {
       throw PlatformException(message: e.toString(), code: '');
     }

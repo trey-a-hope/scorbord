@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:scorbord/pages/HomePage.dart';
 import 'package:scorbord/pages/PlayersPage.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:scorbord/pages/TeamsPage.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key key, @required this.page}) : super(key: key);
@@ -53,22 +55,33 @@ class SideDrawerState extends State<SideDrawer> {
             leading: Icon(Icons.home, color: iconColor),
             title: Text('Home'),
             onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(),
-                  ),
-                );
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
             },
           ),
-                    ListTile(
+          ListTile(
             leading: Icon(Icons.people, color: iconColor),
             title: Text('Players'),
             onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => PlayersPage(),
-                  ),
-                );
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => PlayersPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.perm_data_setting, color: iconColor),
+            title: Text('Teams'),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TeamsPage(),
+                ),
+              );
             },
           ),
         ],

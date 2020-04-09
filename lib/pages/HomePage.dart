@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
         page: 'Home',
       ),
       body: Center(
-        child: Text('Home Page'),
+        child: Text('Welcome to Scorbord.'),
       ),
     );
   }
