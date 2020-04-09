@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:scorbord/pages/PlayersPage.dart';
 import 'package:scorbord/pages/exampleWidget.dart';
 import 'package:scorbord/services/NBAService.dart';
 import 'package:scorbord/services/auth.dart';
@@ -13,7 +14,6 @@ import 'package:scorbord/services/validator.dart';
 final GetIt getIt = GetIt.instance;
 
 void main() {
-
   //Widgets Flutter Binding
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -23,8 +23,8 @@ void main() {
   getIt.registerSingleton<Modal>(ModalImplementation(), signalsReady: true);
   getIt.registerSingleton<Validator>(ValidatorImplementation(),
       signalsReady: true);
-        getIt.registerSingleton<Auth>(AuthImplementation(), signalsReady: true);
-getIt.registerSingleton<INBAService>(NBAService(), signalsReady: true);
+  getIt.registerSingleton<Auth>(AuthImplementation(), signalsReady: true);
+  getIt.registerSingleton<INBAService>(NBAService(), signalsReady: true);
 
   runApp(MyApp());
 }

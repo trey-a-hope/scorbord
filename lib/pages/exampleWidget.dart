@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:scorbord/constants.dart';
+import 'package:scorbord/models/PlayerModel.dart';
 import 'package:scorbord/models/local/nba_team.dart';
 import 'package:scorbord/services/NBAService.dart';
 import 'package:get_it/get_it.dart';
@@ -21,8 +22,8 @@ class ExampleWidgetState extends State<ExampleWidget> {
   }
 
   load() async {
-    Map map = await getIt<INBAService>().getPlayer(playerID: 495);
-    print(map['last_name']);
+    PlayerModel player = await getIt<INBAService>().getPlayer(playerID: 495);
+    print(player.lastName);
   }
 
   @override

@@ -3,52 +3,57 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show Encoding, json;
 
+import 'package:scorbord/models/PlayerModel.dart';
+
 abstract class INBAService {
-  Future<Map> getPlayers();
-  Future<Map> getPlayer({@required int playerID});
+  Future<List<PlayerModel>> getPlayers({@required int page});
+  Future<PlayerModel> getPlayer({@required int playerID});
 }
 
 class NBAService extends INBAService {
   final String endpoint = 'https://www.balldontlie.io/api/v1/';
+  final String authority = 'www.balldontlie.io';
+  final String unencodedPath = '/api/v1/';
 
   @override
-  Future<Map> getPlayers() async {
+  Future<List<PlayerModel>> getPlayers({@required int page}) async {
+    Map<String, String> params = {
+      'page': '$page',
+    };
+    Uri uri = Uri.https(authority, '${unencodedPath}players', params);
+
     http.Response response = await http.get(
-      '${endpoint}players',
+      uri,
       headers: {'content-type': 'application/json'},
     );
 
     try {
       Map bodyMap = json.decode(response.body);
-      List<dynamic> dataMap = bodyMap['data'];
-
-      Map s;
-      for(var i = 0; i < dataMap.length; i++){
-        s = dataMap[i];
-      }
-      return s;
+      List<dynamic> playersData = bodyMap['data'];
+      List<PlayerModel> players = List<PlayerModel>();
+      playersData.forEach((playerData) {
+        PlayerModel player = PlayerModel.fromJSON(map: playerData);
+        players.add(player);
+      });
+      return players;
     } catch (e) {
       throw PlatformException(message: e.toString(), code: '');
     }
   }
 
   @override
-  Future<Map> getPlayer({@required int playerID}) async {
+  Future<PlayerModel> getPlayer({@required int playerID}) async {
+    Uri uri = Uri.https(authority, '${unencodedPath}players/$playerID');
+
     http.Response response = await http.get(
-      '${endpoint}players/$playerID',
+      uri,
       headers: {'content-type': 'application/json'},
     );
 
     try {
       Map bodyMap = json.decode(response.body);
-
-      return bodyMap;
-      // if (map['statusCode'] == null) {
-      //   return map['id'];
-      // } else {
-      //   throw PlatformException(
-      //       message: map['raw']['message'], code: map['raw']['code']);
-      // }
+      PlayerModel player = PlayerModel.fromJSON(map: bodyMap);
+      return player;
     } catch (e) {
       throw PlatformException(message: e.toString(), code: '');
     }
