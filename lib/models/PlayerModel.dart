@@ -5,7 +5,7 @@ class PlayerModel {
   final String firstName;
   final String lastName;
   final String position;
-
+ 
   PlayerModel(
       {@required this.id,
       @required this.firstName,

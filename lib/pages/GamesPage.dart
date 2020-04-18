@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:scorbord/common/spinner.dart';
 import 'package:scorbord/models/GameModel.dart';
-import 'package:scorbord/models/PlayerModel.dart';
-import 'package:scorbord/models/TeamModel.dart';
+import 'package:scorbord/pages/GameDetailsPage.dart';
 import 'package:scorbord/services/NBAService.dart';
 import 'package:scorbord/widgets/SideDrawer.dart';
 import 'package:pagination/pagination.dart';
@@ -14,8 +13,10 @@ class GamesPage extends StatefulWidget {
 }
 
 class GamesPageState extends State<GamesPage> {
-  final GetIt getIt = GetIt.I;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final INBAService nbaService = GetIt.I<INBAService>();
+
   int page = 1;
   bool endPageFetch = false;
 
@@ -26,7 +27,7 @@ class GamesPageState extends State<GamesPage> {
 
   Future<List<GameModel>> pageFetch(int offset) async {
     if (!endPageFetch) {
-      List<GameModel> games = await getIt<INBAService>().getGames(page: page);
+      List<GameModel> games = await nbaService.getGames(page: page);
 
       if (games.isEmpty) endPageFetch = true;
 
@@ -58,7 +59,15 @@ class GamesPageState extends State<GamesPage> {
             title: Text('ID: ${game.id}'),
             subtitle: Text('Season: ${game.season}'),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GamesDetailsPage(
+                    gameID: game.id,
+                  ),
+                ),
+              );
+            },
           );
         },
         pageFetch: pageFetch,

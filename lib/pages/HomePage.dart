@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:scorbord/widgets/SideDrawer.dart';
@@ -28,9 +27,15 @@ class HomePageState extends State<HomePage> {
         page: 'Home',
       ),
       body: Center(
-        child: Text('Welcome to Scorbord.'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Text('Welcome to Scorbord.'),
+            Text('Share game information with your friends.')
+          ],
+        ),
       ),
     );
   }
-
 }

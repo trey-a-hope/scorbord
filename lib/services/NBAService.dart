@@ -148,7 +148,7 @@ class NBAService extends INBAService {
       });
       return games;
     } catch (e) {
-      throw PlatformException(message: e.toString(), code: '');
+      throw PlatformException(message: e.message, code: '');
     }
   }
 }

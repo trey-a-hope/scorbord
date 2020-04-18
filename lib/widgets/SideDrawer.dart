@@ -67,28 +67,28 @@ class SideDrawerState extends State<SideDrawer> {
               );
             },
           ),
-          ListTile(
-            leading: Icon(Icons.people, color: iconColor),
-            title: Text('Players'),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => PlayersPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.perm_data_setting, color: iconColor),
-            title: Text('Teams'),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => TeamsPage(),
-                ),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.people, color: iconColor),
+          //   title: Text('Players'),
+          //   onTap: () {
+          //     Navigator.of(context).pushReplacement(
+          //       MaterialPageRoute(
+          //         builder: (context) => PlayersPage(),
+          //       ),
+          //     );
+          //   },
+          // ),
+          // ListTile(
+          //   leading: Icon(Icons.perm_data_setting, color: iconColor),
+          //   title: Text('Teams'),
+          //   onTap: () {
+          //     Navigator.of(context).pushReplacement(
+          //       MaterialPageRoute(
+          //         builder: (context) => TeamsPage(),
+          //       ),
+          //     );
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.games, color: iconColor),
             title: Text('Games'),
